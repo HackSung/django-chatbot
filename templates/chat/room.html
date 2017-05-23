@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% load staticfiles %}
+
+    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
+        <div class="col-xs-12 col-md-12">
+            <div class="quiet">
+                다음의 URL로 누구든지 채팅방에 입장할수 있습니다.<br/>
+                <code>{{ request.scheme }}://{{ request.get_host }}/{{ room.label }}</code>
+            </div><br/>
+            <div>
+                <input id="handle" type="text" placeholder="대화명을 입력하세요.">
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading top-bar">
+                    <div class="col-md-8 col-xs-8">
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> 채팅방<br/> {{ room.label }}</h3>
+                    </div>
+                    <div class="col-md-4 col-xs-4" style="text-align: right;">
+                        <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim"></span></a>
+                        <a href="#"><span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span></a>
+                    </div>
+                </div>
+                <div id="chat" class="panel-body msg_container_base">
+                    {% for message in messages %}
+                        {% if message.handle == "Watson" %}
+                            <div class="row msg_container base_receive">
+                                <div class="col-md-2 col-xs-2 avatar">
+                                    <img src="https://avatars.slack-edge.com/2017-04-28/175249502928_e953aa49341fe733642b_72.png" class=" img-responsive ">
+                                </div>
+                                <div class="col-md-10 col-xs-10">
+                                    <div class="messages msg_receive">
+                                        <p>{{ message.message }}</p>
+                                        <time datetime="2009-11-13T20:00">{{ message.handle }} • {{ message.formatted_timestamp }}</time>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="row msg_container base_sent">
+                                <div class="col-md-10 col-xs-10">
+                                    <div class="messages msg_sent">
+                                        <p>{{ message.message }}</p>
+                                        <time datetime="2009-11-13T20:00">{{ message.handle }} • {{ message.formatted_timestamp }}</time>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-xs-2 avatar">
+                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="btn-input" type="text" class="form-control input-sm chat_input" placeholder="왓슨에게 보낼 메세지를 입력하세요." />
+                        <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" id="btn-chat">전송</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block afterbody %}
+  <script type="text/javascript" src='{% static "jquery-1.12.1.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "reconnecting-websocket.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "chat.js" %}'></script>
+  <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+{% endblock afterbody %}

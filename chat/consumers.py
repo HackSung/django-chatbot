@@ -11,8 +11,8 @@ log = logging.getLogger(__name__)
 
 conversation = Conversation(
     version='2017-04-21',
-    username='77e4942c-7147-4be9-a08b-7dd30bc12d97',
-    password='VvZAfVqEz1bD'
+    username='<your key token pasted here>',
+    password='<your key token pasted here>'
 )
 
 

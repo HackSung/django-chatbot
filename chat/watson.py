@@ -8,19 +8,19 @@ from watson_developer_cloud import ToneAnalyzerV3 as ToneAnalyzer
 from watson_developer_cloud import VisualRecognitionV3 as VisualRecognition
 
 language_translator = LanguageTranslator(
-    username='<ENTER TEXT KEY FROM WATSON>',
-    password='<ENTER TEXT KEY FROM WATSON>'
+    username='0ad83f2b-2d4f-443e-8b6d-1fee06e7ee65',
+    password='k1Z6w3cfzU0l'
 )
 
 visual_recognition = VisualRecognition(
     version='2016-05-20',
-    api_key='<ENTER TEXT KEY FROM WATSON>'
+    api_key='78f163915f8905ea1d3e05203e6599a6ce4a3460'
 )
 
 tone_analyzer = ToneAnalyzer(
     version='2016-05-19',
-    username='<ENTER TEXT KEY FROM WATSON>',
-    password='<ENTER TEXT KEY FROM WATSON>'
+    username='4ef27090-7dff-43cb-aef5-b9c21e345581',
+    password='ccnDds5xufzu'
 )
 
 

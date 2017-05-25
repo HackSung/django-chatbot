@@ -110,6 +110,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            "expiry": 90000
         },
         "ROUTING": "chat.routing.channel_routing",
     },

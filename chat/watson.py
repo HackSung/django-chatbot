@@ -15,7 +15,7 @@ language_translator = LanguageTranslator(
 
 visual_recognition = VisualRecognition(
     version='2016-05-20',
-    api_key='78f163915f8905ea1d3e05203e6599a6ce4a3460'
+    api_key='4beec9a677ee8140f62645d7dcb8d52bffbcd0c3'
 )
 
 tone_analyzer = ToneAnalyzer(
@@ -86,7 +86,7 @@ def crawl_air_info(region):
     soup = BeautifulSoup(request.content, "html.parser", from_encoding="utf-8")
 
     date = soup.find('h4', 'mgb10').text
-    base_date = date[date.index(':') + 2:].strip()
+    base_date = date[date.index('측정일자 :') + 1:].strip()
 
     seoul_air_info = {}
     rows = soup.find('table', 'tbl2').find_all('tr')

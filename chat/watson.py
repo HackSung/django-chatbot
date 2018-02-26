@@ -14,7 +14,7 @@ language_translator = LanguageTranslator(
 )
 
 visual_recognition = VisualRecognition(
-    version='2016-05-20',
+    '2016-05-20',
     api_key='4beec9a677ee8140f62645d7dcb8d52bffbcd0c3'
 )
 
@@ -86,7 +86,7 @@ def crawl_air_info(region):
     soup = BeautifulSoup(request.content, "html.parser", from_encoding="utf-8")
 
     date = soup.find('h4', 'mgb10').text
-    base_date = date[date.index('측정일자 :') + 1:].strip()
+    base_date = date[date.index('측정일자 :'):].strip()
 
     seoul_air_info = {}
     rows = soup.find('table', 'tbl2').find_all('tr')
@@ -119,14 +119,16 @@ def translate(text, target_language):
 
 def analyze_image(image_url, image_type):
     result_text = ""
+
     if image_type == "전체":
         image_response = visual_recognition.classify(
             images_url=image_url
         )
     elif image_type == "얼굴":
-        image_response = visual_recognition.detect_faces(
-            images_url=image_url
+        image_response = visual_recognition.classify(
+            parameters=json.dumps({'url': image_url})
         )
+
     print("image response:\n" + json.dumps(image_response, indent=2))
     if "error" in image_response['images'][0]:
         return "이미지 분석중 다음의 에러가 발생하였습니다.\n" + image_response['images'][0]['error']['description']
